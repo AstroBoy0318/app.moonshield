@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from '@pizzafinance/ui-sdk'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import {useTokenBalance} from 'hooks/useTokenBalance'
+import { useTokenBalance } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { getPizzaAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'

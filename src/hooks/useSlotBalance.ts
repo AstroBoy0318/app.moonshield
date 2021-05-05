@@ -4,7 +4,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
 import pizzaABI from 'config/abi/pizza.json'
 import { getContract } from 'utils/web3'
-import { getTokenBalance, getSlotBalance, getMoonBalance } from 'utils/erc20'
+import { getMoonBalance, getSlotBalance, getTokenBalance } from 'utils/erc20'
 import { getPizzaAddress } from 'utils/addressHelpers'
 import useRefresh from './useRefresh'
 

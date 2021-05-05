@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import { provider as ProviderType } from 'web3-core'

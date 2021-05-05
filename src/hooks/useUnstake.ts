@@ -3,7 +3,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useDispatch } from 'react-redux'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { withdraw } from 'utils/callHelpers'
-import { useSlot} from './useContract'
+import { useSlot } from './useContract'
 
 const useUnstake = () => {
   const dispatch = useDispatch()

@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit'
 import farmsConfig from 'config/constants/farms'
 import fetchFarms from './fetchFarms'
 import {
-  fetchFarmUserEarnings,
   fetchFarmUserAllowances,
-  fetchFarmUserTokenBalances,
+  fetchFarmUserEarnings,
   fetchFarmUserStakedBalances,
+  fetchFarmUserTokenBalances,
 } from './fetchFarmUser'
-import { FarmsState, Farm } from '../types'
+import { Farm, FarmsState } from '../types'
 
 const initialState: FarmsState = { data: [...farmsConfig] }
 

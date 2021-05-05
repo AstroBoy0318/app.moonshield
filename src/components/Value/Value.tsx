@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup'
 
 import styled from 'styled-components'

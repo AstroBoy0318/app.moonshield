@@ -1,6 +1,6 @@
 import React from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Button, useModal, useWalletModal } from '@pizzafinance/ui-sdk'
+import { Button, useWalletModal } from '@pizzafinance/ui-sdk'
 
 const ConnectButton = (props) => {
   const { connect, reset } = useWallet()

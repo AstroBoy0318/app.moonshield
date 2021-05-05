@@ -5,10 +5,10 @@ import { fetchPoolsBlockLimits, fetchPoolsTotalStatking } from './fetchPools'
 import {
   fetchPoolsAllowance,
   fetchUserBalances,
-  fetchUserStakeBalances,
   fetchUserPendingRewards,
+  fetchUserStakeBalances,
 } from './fetchPoolsUser'
-import { PoolsState, Pool } from '../types'
+import { Pool, PoolsState } from '../types'
 
 const initialState: PoolsState = { data: [...poolsConfig] }
 
