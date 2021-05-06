@@ -4,10 +4,10 @@
   "version": "0.1.2",
   "private": true,
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js'",    
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@binance-chain/bsc-use-wallet": "^0.8.1",
+    "@craco/craco": "^6.1.2",
     "@crowdin/crowdin-api-client": "^1.10.3",
     "@ethersproject/abi": "^5.0.7",
     "@pizzafinance/ui-sdk": "^0.1.4",
@@ -61,8 +62,11 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@pancakeswap-libs/eslint-config-pancake": "1.0.0",
     "@types/jest": "^26.0.19",
+    "autoprefixer": "^9.8.6",
     "eslint": "^7.16.0",
+    "postcss": "^7.0.35",
     "prettier": "^2.1.2",
-    "source-map-explorer": "^2.5.1"
+    "source-map-explorer": "^2.5.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
 }

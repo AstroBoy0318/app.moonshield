@@ -6,6 +6,7 @@ import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import GlobalStyle from './style/Global'
 import PageLoader from './components/PageLoader'
+import Menu from './views/Home/components/Menu'
 // import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 
 // Route-based code splitting
@@ -34,6 +35,7 @@ const App: React.FC = () => {
     <Router>
       <ResetCSS />
       <GlobalStyle />
+      <Menu fixed />
       <Suspense fallback={<PageLoader />}>
         <Switch>
           <Route path="/" exact>

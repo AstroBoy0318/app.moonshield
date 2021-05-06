@@ -1,6 +1,6 @@
 import React from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Button, useWalletModal } from '@pizzafinance/ui-sdk'
+import { useWalletModal } from '@pizzafinance/ui-sdk'
 
 const ConnectButton = (props) => {
   const { connect, reset } = useWallet()
@@ -9,15 +9,15 @@ const ConnectButton = (props) => {
   const accountEllipsis = account ? `${account.substring(0, 4)  }...${  account.substring(account.length - 4)}` : null;
   if(account === null){
     return (
-        <Button onClick={onPresentConnectModal} style={{marginRight:'30px'}}>
+        <button type="button" onClick={onPresentConnectModal} className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold px-6 py-3 rounded-3xl focus:outline-none">
           Connect
-        </Button>
+        </button>
     )
   }
   return (
-    <Button onClick={onPresentAccountModal} title={account} style={{marginRight:'30px'}}>
+    <button type="button" onClick={onPresentAccountModal} title={account} className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold px-6 py-3 rounded-3xl focus:outline-none">
       {accountEllipsis}
-    </Button>
+    </button>
   )
 }
 
