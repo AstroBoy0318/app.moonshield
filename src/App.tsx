@@ -7,9 +7,7 @@ import { useFetchPublicData } from 'state/hooks'
 import GlobalStyle from './style/Global'
 import PageLoader from './components/PageLoader'
 import Menu from './views/Home/components/Menu'
-// import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 
-// Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page'
 const Home = lazy(() => import('./views/Home'))
 const NotFound = lazy(() => import('./views/NotFound'))

@@ -1,9 +1,10 @@
 import React from "react";
 import { useWallet } from "@binance-chain/bsc-use-wallet"
 import ConnectButton from './ConnectButton'
+import Button from '../../../components/Button'
+
 
 export default function Menu({ fixed }) {
-  const [menuOpen, setMenuOpen] = React.useState(false)
   const { account } = useWallet()
 
   const guideHandler = ()=>{
@@ -11,15 +12,21 @@ export default function Menu({ fixed }) {
   }
   return (
     <>
-      <div className="flex flex-wrap shadow-lg fixed">
-        <div className="w-full">
-          <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-white-500">
-            <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-              <ul className="flex flex-row list-none ml-auto">
+      <div className="flex flex-wrap shadow-xl sticky bg-white">
+        <div className="w-full max-w-screen-lg mx-auto">
+          <nav className="relative flex flex-wrap items-center justify-between px-2 py-2 bg-white-500">
+            <div className="container px-4 mx-auto flex flex-wrap justify-between w-full">
+              <div>
+                <img src="/images/logo.png" alt="logo" className="w-14 inline align-middle"/>
+                <span className="hidden md:inline-block text-md font-bold leading-relaxed ml-4 whitespace-nowrap uppercase text-black">
+                  Moon Shield
+                </span>
+              </div>
+              <ul className="flex flex-row list-none ml-auto mt-3">
                 <li className="nav-item">
-                  <button type="button" className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold px-6 py-3 rounded-3xl focus:outline-none" onClick={guideHandler}>
+                  <Button type="button" onClick={guideHandler}>
                     Guide
-                  </button>
+                  </Button>
                 </li>
                 <li className="nav-item ml-2">
                   <ConnectButton account = {account} />

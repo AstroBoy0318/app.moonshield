@@ -1,23 +1,46 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLink,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useWalletModal } from '@pizzafinance/ui-sdk'
+import Button from 'components/Button'
 
 const ConnectButton = (props) => {
   const { connect, reset } = useWallet()
   const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(connect, reset)
-  const {account} = props;
+  const { account } = props;
   const accountEllipsis = account ? `${account.substring(0, 4)  }...${  account.substring(account.length - 4)}` : null;
+  const localStorageKey = "accountStatus";
+  const logout = ()=>{
+    reset();
+    window.localStorage.removeItem(localStorageKey);
+    window.localStorage.removeItem("showShieldSwapMsg")
+    window.location.reload();
+  }
   if(account === null){
     return (
-        <button type="button" onClick={onPresentConnectModal} className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold px-6 py-3 rounded-3xl focus:outline-none">
+        <Button onClick={onPresentConnectModal}>
+          <FontAwesomeIcon icon={faLink} className="mr-1" />
           Connect
-        </button>
+        </Button>
     )
   }
   return (
-    <button type="button" onClick={onPresentAccountModal} title={account} className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold px-6 py-3 rounded-3xl focus:outline-none">
+  <div className="dropdown inline-block relative">
+    <Button type="button" onClick={onPresentAccountModal} title={account}>
       {accountEllipsis}
-    </button>
+    </Button>
+    <div className="w-full h-5 absolute"> </div>
+    <ul className="hidden w-full dropdown-menu absolute py-1 list-none text-center bg-white top-14">
+      <div className="arrow-up absolute -top-1 left-12"> </div>
+      <li className="hover:bg-blue-100">
+        <Button onClick={ logout }>
+          <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
+          Logout
+        </Button>
+      </li>
+    </ul>
+  </div>
   )
 }
 
