@@ -6,7 +6,7 @@ import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import GlobalStyle from './style/Global'
 import PageLoader from './components/PageLoader'
-import Menu from './views/Home/components/Menu'
+import Menu from './components/Menu'
 
 // Only pool is included in the main bundle because of it's the most visited page'
 const Home = lazy(() => import('./views/Home'))
@@ -33,7 +33,7 @@ const App: React.FC = () => {
     <Router>
       <ResetCSS />
       <GlobalStyle />
-      <Menu fixed />
+      <Menu />
       <Suspense fallback={<PageLoader />}>
         <Switch>
           <Route path="/" exact>

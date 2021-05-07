@@ -22,11 +22,6 @@ const Providers: React.FC = ({ children }) => {
               walletconnect: { rpcUrl },
               bsc,
             }}
-            // chainId = {97}
-            // connectors = {{
-            //   walletconnect : {rpcUrl : "https://data-seed-prebsc-1-s1.binance.org:8545"},
-            //   bsc,
-            // }}
           >
             <BlockContextProvider>
               <RefreshContextProvider>

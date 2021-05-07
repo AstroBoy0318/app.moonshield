@@ -1,13 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLink,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faLink, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useWalletModal } from '@pizzafinance/ui-sdk'
 import Button from 'components/Button'
 
 const ConnectButton = (props) => {
   const { connect, reset } = useWallet()
-  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(connect, reset)
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
   const { account } = props;
   const accountEllipsis = account ? `${account.substring(0, 4)  }...${  account.substring(account.length - 4)}` : null;
   const localStorageKey = "accountStatus";

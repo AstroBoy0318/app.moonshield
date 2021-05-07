@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import useI18n from '../../hooks/useI18n'
 import Input, { InputProps } from '../Input'
 import Button from '../Button'
@@ -10,7 +9,7 @@ interface TokenInputProps extends InputProps {
   onSelectMax?: () => void
 }
 
-const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelectMax, value }) => {
+const TokenInput: React.FC<TokenInputProps> = ({ onChange, onSelectMax, value }) => {
   const TranslateString = useI18n()
   return (
     <div>

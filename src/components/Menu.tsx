@@ -1,10 +1,10 @@
-import React from "react";
-import { useWallet } from "@binance-chain/bsc-use-wallet"
-import ConnectButton from './ConnectButton'
-import Button from '../../../components/Button'
+import React from 'react'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import ConnectButton from '../views/Home/components/ConnectButton'
+import Button from './Button'
 
 
-export default function Menu({ fixed }) {
+export default function Menu() {
   const { account } = useWallet()
 
   const guideHandler = ()=>{
@@ -12,7 +12,7 @@ export default function Menu({ fixed }) {
   }
   return (
     <>
-      <div className="flex flex-wrap shadow-xl sticky bg-white">
+      <div className="flex flex-wrap shadow-xl fixed bg-white w-full z-50">
         <div className="w-full max-w-screen-lg mx-auto">
           <nav className="relative flex flex-wrap items-center justify-between px-2 py-2 bg-white-500">
             <div className="container px-4 mx-auto flex flex-wrap justify-between w-full">

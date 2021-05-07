@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useMaxBalance, useTokenBalance } from 'hooks/useTokenBalance'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart,faQuestionCircle,faHandPointer,faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faHandPointer, faPaperPlane, faQuestionCircle, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import addresses from 'config/constants/contracts'
 import { useLPTotalLiquidity, useMoonBalance, useNextClaimDate, useTotalLiquidity } from 'hooks/useSlotBalance'
 import { useCollectBNB, useSendToken } from 'hooks/useMoonShield'
@@ -28,14 +28,14 @@ const Home: React.FC = () => {
   const tokenBalance = useTokenBalance(tokenAddress)
   let maxTrxBalance = useMaxBalance(tokenAddress)
   maxTrxBalance = maxTrxBalance.div(new BigNumber(1000000000))
-  const fullBalance = tokenBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})
+  const fullBalance = ((tokenBalance.toNumber()/1000000000)).toLocaleString('en-US', {minimumFractionDigits: 3})
   const tokenName = 'Shield'
 
   const collectibleBNB = useMoonBalance(account);
-  const BNBNum = collectibleBNB.toNumber()
+  const BNBNum = collectibleBNB.toNumber()/1000000000000000000
 
   const mynextclaimdate = useNextClaimDate(account);
-  const nextclaimdate = mynextclaimdate.toNumber() === 0?"Not available":new Date(mynextclaimdate.toNumber()).toUTCString()
+  const nextclaimdate = mynextclaimdate.toNumber() === 0?"Not available":new Date(mynextclaimdate.toNumber()*1000).toUTCString()
 
   const contracttotalliquidity = useTotalLiquidity();
   const totalliquidity = contracttotalliquidity.toNumber()
@@ -79,14 +79,14 @@ const Home: React.FC = () => {
   }
   return (
     <Page>
-      <div>
+      <div className="pt-20">
         <div className="bg-white w-full max-w-screen-md mx-auto rounded-5xl p-4 shadow-2xl-centered mt-2">
           <div>
             <img src="/images/bnb.png" alt="bnb" className="h-24 mx-auto"/>
             <h1 className="text-2xl text-center">Moon Shield</h1>
           </div>
           <div className="mx-auto text-xl text-center mt-1">
-            A new way to earn BNB. Classic MRAT (v1) trading is now locked!
+            A new way to earn BNB. 
           </div>
           <div className="text-center mt-6">
             <Button onClick={handleBuyShield} className="mx-auto">
@@ -128,7 +128,7 @@ const Home: React.FC = () => {
                     <div className="text-sm text-center mt-5">Max transaction amount</div>
                   </div>
                   <div className="text-sm text-center mt-2">
-                    SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 3})}
+                    SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 6})}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -188,7 +188,7 @@ const Home: React.FC = () => {
                 }
                 <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
                   <div>
-                    My collectable BNB: <b className="ml-5">{BNBNum.toLocaleString('en-US', {minimumFractionDigits: 3})} BNB</b>
+                    My collectable BNB: <b className="ml-5">{BNBNum.toLocaleString('en-US', {minimumFractionDigits: 6})} BNB</b>
                   </div>
                   <div>
                     <a href="DOC_EARN_BNB_URL" className="text-red-500 font-bold">

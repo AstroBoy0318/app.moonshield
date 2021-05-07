@@ -6,7 +6,6 @@ import pizzaABI from 'config/abi/pizza.json'
 import { getContract } from 'utils/web3'
 import { getMoonBalance, getNextClaimDate, getSlotBalance, getTokenBalance, getTotalLiquidty } from 'utils/erc20'
 import { getShieldAddress } from 'utils/addressHelpers'
-import addresses from 'config/constants/contracts'
 import useRefresh from './useRefresh'
 
 export const useSlotBalance = (tokenAddress: string) => {
