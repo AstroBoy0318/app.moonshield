@@ -17,10 +17,15 @@ module.exports = {
       borderRadius: {
         '5xl': '3rem'
       },
+      textShadow: {
+        'bordered': '0 0 1px black,0 0 1px black,0 0 1px black,0 0 1px black'
+      }
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textshadow')
+  ],
 }

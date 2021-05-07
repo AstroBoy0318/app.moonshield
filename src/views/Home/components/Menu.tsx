@@ -17,9 +17,9 @@ export default function Menu({ fixed }) {
           <nav className="relative flex flex-wrap items-center justify-between px-2 py-2 bg-white-500">
             <div className="container px-4 mx-auto flex flex-wrap justify-between w-full">
               <div>
-                <img src="/images/logo.png" alt="logo" className="w-14 inline align-middle"/>
-                <span className="hidden md:inline-block text-md font-bold leading-relaxed ml-4 whitespace-nowrap uppercase text-black">
-                  Moon Shield
+                <img src="/images/logo.png" alt="logo" className="h-14 inline align-middle"/>
+                <span className="hidden md:inline-block text-lg font-bold leading-relaxed ml-4 whitespace-nowrap uppercase tracking-widest">
+                  <span className="text-white text-shadow-bordered font-sans">Moon</span> <span className="text-yellow-500 font-sans font-black">Shield</span>
                 </span>
               </div>
               <ul className="flex flex-row list-none ml-auto mt-3">

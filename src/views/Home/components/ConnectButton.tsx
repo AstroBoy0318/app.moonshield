@@ -27,7 +27,7 @@ const ConnectButton = (props) => {
   }
   return (
   <div className="dropdown inline-block relative">
-    <Button type="button" onClick={onPresentAccountModal} title={account}>
+    <Button type="button" title={account}>
       {accountEllipsis}
     </Button>
     <div className="w-full h-5 absolute"> </div>

@@ -70,6 +70,7 @@
     "postcss": "^7.0.35",
     "prettier": "^2.1.2",
     "source-map-explorer": "^2.5.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
+    "tailwindcss-textshadow": "^2.1.3"
   }
 }

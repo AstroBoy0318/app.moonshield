@@ -5,7 +5,7 @@ import { provider } from 'web3-core'
 import pizzaABI from 'config/abi/pizza.json'
 import { getContract } from 'utils/web3'
 import { getMaxBalance, getSlotAllowance, getTokenBalance } from 'utils/erc20'
-import { getPizzaAddress } from 'utils/addressHelpers'
+import { getShieldAddress } from 'utils/addressHelpers'
 import { Contract } from 'web3-eth-contract'
 import useRefresh from './useRefresh'
 
@@ -51,7 +51,7 @@ export const useTotalSupply = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const pizzaContract = getContract(pizzaABI, getPizzaAddress())
+      const pizzaContract = getContract(pizzaABI, getShieldAddress())
       const supply = await pizzaContract.methods.totalSupply().call()
       setTotalSupply(new BigNumber(supply))
     }

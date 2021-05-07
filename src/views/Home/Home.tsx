@@ -6,12 +6,13 @@ import { useMaxBalance, useTokenBalance } from 'hooks/useTokenBalance'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart,faQuestionCircle,faHandPointer,faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import addresses from 'config/constants/contracts'
-import { useMoonBalance } from 'hooks/useSlotBalance'
+import { useLPTotalLiquidity, useMoonBalance, useNextClaimDate, useTotalLiquidity } from 'hooks/useSlotBalance'
 import { useCollectBNB, useSendToken } from 'hooks/useMoonShield'
 import TokenInput from 'components/TokenInput'
 import { BUY_SMART_URL, WALLETS } from '../../config'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+import { usePriceBnbBusd } from '../../state/hooks'
 
 const Home: React.FC = () => {
   const chainId = process.env.REACT_APP_CHAIN_ID
@@ -21,17 +22,34 @@ const Home: React.FC = () => {
   const { account } = useWallet()
   const { onSend } = useSendToken()
   const [pendingTx, setPendingTx] = useState(false)
-  const tokenAddress = addresses.pizza[chainId]
+  const tokenAddress = addresses.moonShield[chainId]
   const { onCollect } = useCollectBNB()
   
   const tokenBalance = useTokenBalance(tokenAddress)
   let maxTrxBalance = useMaxBalance(tokenAddress)
   maxTrxBalance = maxTrxBalance.div(new BigNumber(1000000000))
-  const fullBalance = tokenBalance.toString()
+  const fullBalance = tokenBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})
   const tokenName = 'Shield'
 
   const collectibleBNB = useMoonBalance(account);
   const BNBNum = collectibleBNB.toNumber()
+
+  const mynextclaimdate = useNextClaimDate(account);
+  const nextclaimdate = mynextclaimdate.toNumber() === 0?"Not available":new Date(mynextclaimdate.toNumber()).toUTCString()
+
+  const contracttotalliquidity = useTotalLiquidity();
+  const totalliquidity = contracttotalliquidity.toNumber()
+  const realtotalliquidity = (totalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+
+  const bnbPrice = usePriceBnbBusd();
+  const totalvalue = bnbPrice.toNumber()
+  const realvalue = (totalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+
+  const contractlptotalliquidity = useLPTotalLiquidity();
+  const lptotalliquidity = contractlptotalliquidity.toNumber()
+  const reallptotalliquidity = (lptotalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+
+  const reallpvalue = (lptotalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -64,7 +82,7 @@ const Home: React.FC = () => {
       <div>
         <div className="bg-white w-full max-w-screen-md mx-auto rounded-5xl p-4 shadow-2xl-centered mt-2">
           <div>
-            <img src="/images/bnb.png" alt="bnb" className="w-24 mx-auto"/>
+            <img src="/images/bnb.png" alt="bnb" className="h-24 mx-auto"/>
             <h1 className="text-2xl text-center">Moon Shield</h1>
           </div>
           <div className="mx-auto text-xl text-center mt-1">
@@ -110,7 +128,7 @@ const Home: React.FC = () => {
                     <div className="text-sm text-center mt-5">Max transaction amount</div>
                   </div>
                   <div className="text-sm text-center mt-2">
-                    SHIELD {maxTrxBalance.toNumber()} | BNB 0.0000
+                    SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 3})}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -119,16 +137,16 @@ const Home: React.FC = () => {
                     <div className="text-sm text-center mt-5">Total liquidity pool</div>
                   </div>
                   <div className="text-sm text-center mt-2">
-                    $ 0.00
+                    $ {reallpvalue}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
                   <div>
-                    <img src="/images/1_mil_smart.png" alt="Total liquidity pool" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Total liquidity pool</div>
+                    <img src="/images/1_mil_smart.png" alt="Current 1 mil SMRAT Price" className="h-24 mx-auto mt-5"/>
+                    <div className="text-sm text-center mt-5">Total reward pool</div>
                   </div>
                   <div className="text-sm text-center mt-2">
-                    $ 0.000000000
+                    $ {realvalue}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -137,7 +155,7 @@ const Home: React.FC = () => {
                     <div className="text-sm text-center mt-5">Total BNB in liquidity pool</div>
                   </div>
                   <div className="text-sm text-center mt-2">
-                    BNB 2,017.00
+                    BNB {reallptotalliquidity}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -146,7 +164,7 @@ const Home: React.FC = () => {
                     <div className="text-sm text-center mt-5">Total BNB in reward pool</div>
                   </div>
                   <div className="text-sm text-center mt-2">
-                    BNB 2,017.00
+                    BNB {realtotalliquidity}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -170,7 +188,7 @@ const Home: React.FC = () => {
                 }
                 <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
                   <div>
-                    My collectable BNB: <b className="ml-5">{BNBNum} BNB</b>
+                    My collectable BNB: <b className="ml-5">{BNBNum.toLocaleString('en-US', {minimumFractionDigits: 3})} BNB</b>
                   </div>
                   <div>
                     <a href="DOC_EARN_BNB_URL" className="text-red-500 font-bold">
@@ -179,7 +197,10 @@ const Home: React.FC = () => {
                     </a>
                   </div>
                   <div className="text-center">
-                    <Button className="mt-10 bg-blend-lighten" onClick={onCollect} disabled = {!BNBNum}>
+                    <div className="mt-5 font-bold text-3xl">
+                      You can collect your BNB at : {nextclaimdate}
+                    </div>
+                    <Button className="mt-5" onClick={onCollect} disabled = {!BNBNum}>
                       <FontAwesomeIcon icon={faHandPointer} className="mr-1"/>
                       Collect my BNB
                     </Button>

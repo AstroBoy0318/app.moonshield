@@ -6,6 +6,7 @@ import erc20 from 'config/abi/erc20.json'
 import slot from 'config/abi/slot.json'
 import moonShield from 'config/abi/moonShield.json'
 import addresses from 'config/constants/contracts'
+import multiCall from 'config/abi/Multicall.json'
 
 export const getContract = (provider: ProviderType, address: string) => {
   const web3 = new Web3(provider)
@@ -98,3 +99,35 @@ export const getSlotAllowance = async (
   }
 }
 
+export const getNextClaimDate = async (
+  provider: ProviderType,
+  userAddress: string,
+): Promise<string> => {
+  const web3 = new Web3(provider)
+  const chainId = process.env.REACT_APP_CHAIN_ID
+  const address = addresses.moonShield[chainId]
+  const contract = new web3.eth.Contract((moonShield as unknown) as AbiItem, address)
+  try {
+    const balance: string = await contract.methods.nextAvailableClaimDate(userAddress).call()
+    return balance
+  } catch (e) {
+    return '0'
+  }
+}
+
+
+export const getTotalLiquidty = async (
+  provider: ProviderType,
+  userAddress: string,
+): Promise<string> => {
+  const web3 = new Web3(provider)
+  const chainId = process.env.REACT_APP_CHAIN_ID
+  const address = addresses.mulltiCall[chainId]
+  const contract = new web3.eth.Contract((multiCall as unknown) as AbiItem, address)
+  try {
+    const balance: string = await contract.methods.getEthBalance(userAddress).call()
+    return balance
+  } catch (e) {
+    return '0'
+  }
+}

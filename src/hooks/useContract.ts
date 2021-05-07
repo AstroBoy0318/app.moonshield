@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { AbiItem } from 'web3-utils'
 import { ContractOptions } from 'web3-eth-contract'
 import useWeb3 from 'hooks/useWeb3'
-import { getMasterChefAddress, getPizzaAddress, getSlotAddress } from 'utils/addressHelpers'
+import { getMasterChefAddress, getShieldAddress, getSlotAddress } from 'utils/addressHelpers'
 import erc20 from 'config/abi/erc20.json'
 import masterChef from 'config/abi/masterchef.json'
 import slot from 'config/abi/slot.json'
@@ -23,8 +23,8 @@ export const useERC20 = (address: string) => {
   return useContract(erc20Abi, address)
 }
 
-export const usePizza = () => {
-  return useERC20(getPizzaAddress())
+export const useShield = () => {
+  return useERC20(getShieldAddress())
 }
 
 
