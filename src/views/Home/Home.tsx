@@ -28,28 +28,29 @@ const Home: React.FC = () => {
   const tokenBalance = useTokenBalance(tokenAddress)
   let maxTrxBalance = useMaxBalance(tokenAddress)
   maxTrxBalance = maxTrxBalance.div(new BigNumber(1000000000))
-  const fullBalance = ((tokenBalance.toNumber()/1000000000)).toLocaleString('en-US', {minimumFractionDigits: 3})
+  const fullBalance = tokenBalance.toNumber() === 0?'0':((tokenBalance.toNumber()/1000000000)).toLocaleString('en-US', {minimumFractionDigits: 3})
   const tokenName = 'Shield'
 
   const collectibleBNB = useMoonBalance(account);
   const BNBNum = collectibleBNB.toNumber()/1000000000000000000
+  const formatedBNBNum = BNBNum === 0?'0':BNBNum.toLocaleString('en-US', {minimumFractionDigits: 8})
 
   const mynextclaimdate = useNextClaimDate(account);
   const nextclaimdate = mynextclaimdate.toNumber() === 0?"Not available":new Date(mynextclaimdate.toNumber()*1000).toUTCString()
 
   const contracttotalliquidity = useTotalLiquidity();
   const totalliquidity = contracttotalliquidity.toNumber()
-  const realtotalliquidity = (totalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+  const realtotalliquidity = totalliquidity === 0?'0':(totalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
   const bnbPrice = usePriceBnbBusd();
   const totalvalue = bnbPrice.toNumber()
-  const realvalue = (totalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+  const realvalue = totalvalue === 0?'0':(totalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
   const contractlptotalliquidity = useLPTotalLiquidity();
   const lptotalliquidity = contractlptotalliquidity.toNumber()
-  const reallptotalliquidity = (lptotalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+  const reallptotalliquidity = lptotalliquidity === 0?'0':(lptotalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
-  const reallpvalue = (lptotalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+  const reallpvalue = lptotalliquidity*totalvalue===0?'0':(lptotalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -128,10 +129,10 @@ const Home: React.FC = () => {
                     <div className="text-sm text-center mt-5">Max transaction amount</div>
                   </div>
                   {/* <div className="text-sm text-center mt-2">
-                    SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 6})}
+                    SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {formatedBNBNum}
                   </div> */}
                   <div className="text-sm text-center mt-2">
-                    SHIELD {fullBalance} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 8})}
+                    SHIELD {fullBalance} | BNB {formatedBNBNum}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -191,7 +192,7 @@ const Home: React.FC = () => {
                 } */}
                 <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
                   <div>
-                    My collectable BNB: <b className="ml-5">{BNBNum.toLocaleString('en-US', {minimumFractionDigits: 8})} BNB</b>
+                    My collectable BNB: <b className="ml-5">{formatedBNBNum} BNB</b>
                   </div>
                   <div>
                     <a href={DOC_EARN_BNB_URL} className="text-red-500 font-bold" target="_blank" rel="noreferrer">
