@@ -8,7 +8,7 @@ export default function Menu() {
   const { account } = useWallet()
 
   const guideHandler = ()=>{
-    window.open("https://moonrat.finance/guide")
+    window.open("https://docs.moonshield.finance/")
   }
   return (
     <>

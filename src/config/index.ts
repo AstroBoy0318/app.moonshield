@@ -11,7 +11,7 @@ export const BLOCKS_PER_YEAR = new BigNumber(10512000)
 export const BSC_BLOCK_TIME = 3
 export const PIZZA_POOL_PID = 1
 
-export const BUY_SMART_URL = "https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x68590a47578e5060a29fd99654f4556dbfa05d10"
+export const BUY_SMART_URL = "https://exchange.pancakeswap.finance/#/swap?outputCurrency=0xF565aaf0b8EB813a1c8C956D2C59F1ce27FD2366"
 export const WALLETS = [
   {
     name: "Metamask",
@@ -30,5 +30,5 @@ export const WALLETS = [
     url: "https://www.youtube.com/watch?v=ObZXYxJpgwA",
   },
 ]
-export const DOC_EARN_BNB_URL = "https://docs.moonrat.finance/innovation/earn-bnb"
-export const DOC_ANTI_WHALES_URL = "https://docs.moonrat.finance/innovation/anti-whales"
+export const DOC_EARN_BNB_URL = "https://docs.moonshield.finance/innovation/a-new-way-to-earn-bnb"
+export const DOC_ANTI_WHALES_URL = "https://docs.moonshield.finance/innovation/anti-whales"

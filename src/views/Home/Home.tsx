@@ -9,7 +9,7 @@ import addresses from 'config/constants/contracts'
 import { useLPTotalLiquidity, useMoonBalance, useNextClaimDate, useTotalLiquidity } from 'hooks/useSlotBalance'
 import { useCollectBNB, useSendToken } from 'hooks/useMoonShield'
 import TokenInput from 'components/TokenInput'
-import { BUY_SMART_URL, WALLETS } from '../../config'
+import { BUY_SMART_URL, DOC_ANTI_WHALES_URL, DOC_EARN_BNB_URL, WALLETS } from '../../config'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { usePriceBnbBusd } from '../../state/hooks'
@@ -127,8 +127,11 @@ const Home: React.FC = () => {
                     <img src="/images/max_trans.png" alt="Max Transaction" className="h-24 mx-auto mt-5"/>
                     <div className="text-sm text-center mt-5">Max transaction amount</div>
                   </div>
-                  <div className="text-sm text-center mt-2">
+                  {/* <div className="text-sm text-center mt-2">
                     SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 6})}
+                  </div> */}
+                  <div className="text-sm text-center mt-2">
+                    SHIELD {fullBalance} | BNB {BNBNum.toLocaleString('en-US', {minimumFractionDigits: 8})}
                   </div>
                 </div>
                 <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
@@ -178,20 +181,20 @@ const Home: React.FC = () => {
                 </div>
               </div>
               <div className="mt-28 text-sm">
-                {
+                {/* {
                   showShieldSwapMsg && (
                   <div className="w-full bg-white font-bold px-10 py-16 rounded-5xl shadow-2xl">
                     <span>SMRAT swap is not available: You don&apos;t have any classic MRAT </span>
                     <Button className="ml-4" onClick={()=>{ window.localStorage.setItem("showShieldSwapMsg",""); setShowShieldSwapMsg(false) }}>Close</Button>
                   </div>
                   )
-                }
+                } */}
                 <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
                   <div>
-                    My collectable BNB: <b className="ml-5">{BNBNum.toLocaleString('en-US', {minimumFractionDigits: 6})} BNB</b>
+                    My collectable BNB: <b className="ml-5">{BNBNum.toLocaleString('en-US', {minimumFractionDigits: 8})} BNB</b>
                   </div>
                   <div>
-                    <a href="DOC_EARN_BNB_URL" className="text-red-500 font-bold">
+                    <a href={DOC_EARN_BNB_URL} className="text-red-500 font-bold" target="_blank" rel="noreferrer">
                       *pool is always changing based on buys, sells, and collects by others, learn more here
                       <FontAwesomeIcon icon={faQuestionCircle} className="text-green-500"/>
                     </a>
@@ -209,14 +212,14 @@ const Home: React.FC = () => {
                 <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
                   <div>
                     Disruptive Transfer between 2 wallets
-                    <a href="DOC_ANTI_WHALES_URL" className="ml-10">
+                    <a href={DOC_ANTI_WHALES_URL} className="ml-10" target="_blank" rel="noreferrer">
                       <FontAwesomeIcon icon={faQuestionCircle} className="text-green-500"/>
                     </a>
                     <b className="ml-16">Balance: {fullBalance} SHIELD</b>
                   </div>
                   <div className="w-full sm:w-3/5 mx-auto mt-5">
                     <div className="w-full grid grid-cols-3 gap-2">
-                      <div className="text-right py-1">
+                      <div className="text-right py-1.5">
                         <b>Recipient (address)</b>
                       </div>
                       <div className="col-span-2">
@@ -226,7 +229,7 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                     <div className="w-full grid grid-cols-3 gap-2 mt-4">
-                      <div className="text-right py-1">
+                      <div className="text-right py-1.5">
                         <b>Amount (SHIELD)</b>
                       </div>
                       <div className="col-span-2">
