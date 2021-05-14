@@ -13,6 +13,7 @@ import { BUY_SMART_URL, DOC_ANTI_WHALES_URL, DOC_EARN_BNB_URL, WALLETS } from '.
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { usePriceBnbBusd } from '../../state/hooks'
+import InfoItem from './components/InfoItem'
 
 const Home: React.FC = () => {
   const chainId = process.env.REACT_APP_CHAIN_ID
@@ -81,12 +82,15 @@ const Home: React.FC = () => {
   return (
     <Page>
       <div className="pt-20">
-        <div className="bg-white w-full max-w-screen-md mx-auto rounded-5xl p-4 shadow-2xl-centered mt-2">
+        <div className="w-full max-w-screen-md mx-auto rounded-xl p-4 shadow-2xl-centered mt-2 border border-solid border-purple-1000">
           <div>
             <img src="/images/bnb.png" alt="bnb" className="h-24 mx-auto"/>
-            <h1 className="text-2xl text-center">Moon Shield</h1>
+            <h1 className="text-2xl text-center font-bold">
+              <span className="text-white font-sans">Moon</span>
+              <span className="text-yellow-500 font-sans">Shield</span>
+            </h1>
           </div>
-          <div className="mx-auto text-xl text-center mt-1">
+          <div className="mx-auto text-xl text-center mt-1 text-white">
             A new way to earn BNB. 
           </div>
           <div className="text-center mt-6">
@@ -98,21 +102,21 @@ const Home: React.FC = () => {
         </div>
         {!account?
           (
-            <div className="bg-white w-full md:w-10/12 mx-auto rounded-5xl p-4 shadow-2xl mt-10 divide-y-4">
+            <div className="w-full md:w-10/12 mx-auto p-4 shadow-2xl mt-10 rounded-xl divide-y-4 border-purple-1000 border border-solid">
               <div className="mt-8">
-                <h1 className="text-3xl font-bold text-red-500 text-center">You are not connected or not using Binance Smart Chain network</h1>
+                <h1 className="text-3xl font-bold text-yellow-600 text-center">You are not connected or not using Binance Smart Chain network</h1>
               </div>
               <div className="text-center mt-5">
-                <h2 className="text-2xl">
+                <h2 className="text-2xl text-white">
                   To use the app, make sure:
                 </h2>
-                <h2 className="text-2xl text-red-500 w-full sm:max-w-xl mx-auto">
+                <h2 className="text-2xl text-yellow-600 w-full sm:max-w-xl mx-auto">
                   You are using the <b className="font-bold">Binance Smart Chain</b> network
                   You need to connect wallet to continue
                 </h2>
               </div>
               <div className="text-center mt-5">
-                <h2 className="text-2xl">
+                <h2 className="text-2xl text-white">
                   Please switch to BSC Network if you use:
                 </h2>
                 <div className="text-2xl text-green-400 w-full sm:max-w-xl mx-auto">
@@ -122,64 +126,25 @@ const Home: React.FC = () => {
             </div>
           ):(
             <div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mt-10 font-bold">
-                <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
-                  <div>
-                    <img src="/images/max_trans.png" alt="Max Transaction" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Max transaction amount</div>
-                  </div>
-                  {/* <div className="text-sm text-center mt-2">
-                    SHIELD {maxTrxBalance.toNumber().toLocaleString('en-US', {minimumFractionDigits: 3})} | BNB {formatedBNBNum}
-                  </div> */}
-                  <div className="text-sm text-center mt-2">
-                    SHIELD {fullBalance} | BNB {formatedBNBNum}
-                  </div>
-                </div>
-                <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
-                  <div>
-                    <img src="/images/total_liquidity_pool.png" alt="Total liquidity pool" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Total liquidity pool</div>
-                  </div>
-                  <div className="text-sm text-center mt-2">
-                    $ {reallpvalue}
-                  </div>
-                </div>
-                <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
-                  <div>
-                    <img src="/images/1_mil_smart.png" alt="Current 1 mil SMRAT Price" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Total reward pool</div>
-                  </div>
-                  <div className="text-sm text-center mt-2">
-                    $ {realvalue}
-                  </div>
-                </div>
-                <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
-                  <div>
-                    <img src="/images/total_bnb_in_liquidity_pool.png" alt="Total BNB in liquidity pool" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Total BNB in liquidity pool</div>
-                  </div>
-                  <div className="text-sm text-center mt-2">
-                    BNB {reallptotalliquidity}
-                  </div>
-                </div>
-                <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
-                  <div>
-                    <img src="/images/bnb_reward.png" alt="Total BNB in reward pool" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Total BNB in reward pool</div>
-                  </div>
-                  <div className="text-sm text-center mt-2">
-                    BNB {realtotalliquidity}
-                  </div>
-                </div>
-                <div className="bg-white w-full rounded-5xl p-4 shadow-2xl">
-                  <div>
-                    <img src="/images/smart_balance.png" alt="Max Transaction" className="h-24 mx-auto mt-5"/>
-                    <div className="text-sm text-center mt-5">Your SHIELD balance</div>
-                  </div>
-                  <div className="text-sm text-center mt-2">
-                    SHIELD {fullBalance}
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mt-10 font-bold text-white">
+                <InfoItem imgSrc="/images/max_trans.png" label="Max transaction amount">
+                  SHIELD {fullBalance} | BNB {formatedBNBNum}
+                </InfoItem>
+                <InfoItem imgSrc="/images/total_liquidity_pool.png" label="Total liquidity pool">
+                  $ {reallpvalue}
+                </InfoItem>
+                <InfoItem imgSrc="/images/1_mil_smart.png" label="Total reward pool">
+                  $ {realvalue}
+                </InfoItem>
+                <InfoItem imgSrc="/images/total_bnb_in_liquidity_pool.png" label="Total BNB in liquidity pool">
+                  BNB {reallptotalliquidity}
+                </InfoItem>
+                <InfoItem imgSrc="/images/bnb_reward.png" label="Total BNB in reward pool">
+                  BNB {realtotalliquidity}
+                </InfoItem>
+                <InfoItem imgSrc="/images/smart_balance.png" label="Your SHIELD balance">
+                  SHIELD {fullBalance}
+                </InfoItem>
               </div>
               <div className="mt-28 text-sm">
                 {/* {
@@ -190,12 +155,12 @@ const Home: React.FC = () => {
                   </div>
                   )
                 } */}
-                <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
+                <div className="w-full px-10 py-8 rounded-xl shadow-2xl mt-10 border border-solid border-purple-1000 text-white">
                   <div>
                     My collectable BNB: <b className="ml-5">{formatedBNBNum} BNB</b>
                   </div>
                   <div>
-                    <a href={DOC_EARN_BNB_URL} className="text-red-500 font-bold" target="_blank" rel="noreferrer">
+                    <a href={DOC_EARN_BNB_URL} className="text-yellow-600 font-bold" target="_blank" rel="noreferrer">
                       *pool is always changing based on buys, sells, and collects by others, learn more here
                       <FontAwesomeIcon icon={faQuestionCircle} className="text-green-500"/>
                     </a>
@@ -210,7 +175,7 @@ const Home: React.FC = () => {
                     </Button>
                   </div>
                 </div>
-                <div className="w-full bg-white px-10 py-8 rounded-5xl shadow-2xl mt-10">
+                <div className="w-full px-10 py-8 rounded-xl shadow-2xl mt-10 border border-solid border-purple-1000 text-white">
                   <div>
                     Disruptive Transfer between 2 wallets
                     <a href={DOC_ANTI_WHALES_URL} className="ml-10" target="_blank" rel="noreferrer">
@@ -220,7 +185,7 @@ const Home: React.FC = () => {
                   </div>
                   <div className="w-full sm:w-3/5 mx-auto mt-5">
                     <div className="w-full grid grid-cols-3 gap-2">
-                      <div className="text-right py-1.5">
+                      <div className="text-right py-2">
                         <b>Recipient (address)</b>
                       </div>
                       <div className="col-span-2">
@@ -230,7 +195,7 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                     <div className="w-full grid grid-cols-3 gap-2 mt-4">
-                      <div className="text-right py-1.5">
+                      <div className="text-right py-2">
                         <b>Amount (SHIELD)</b>
                       </div>
                       <div className="col-span-2">

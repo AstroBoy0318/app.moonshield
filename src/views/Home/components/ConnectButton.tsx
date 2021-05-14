@@ -31,9 +31,9 @@ const ConnectButton = (props) => {
       {accountEllipsis}
     </Button>
     <div className="w-full h-5 absolute"> </div>
-    <ul className="hidden w-full dropdown-menu absolute py-1 list-none text-center bg-white top-14">
+    <ul className="hidden w-full dropdown-menu absolute py-1 list-none text-center bg-purple-1000 top-14">
       <div className="arrow-up absolute -top-1 left-12"> </div>
-      <li className="hover:bg-blue-100">
+      <li className="hover:bg-purple-900">
         <Button onClick={ logout }>
           <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
           Logout

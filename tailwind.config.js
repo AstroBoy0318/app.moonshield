@@ -19,7 +19,13 @@ module.exports = {
       },
       textShadow: {
         'bordered': '0 0 1px black,0 0 1px black,0 0 1px black,0 0 1px black'
-      }
+      },
+      backgroundColor: {
+        'purple-1000' : '#2c194d'
+      },
+      borderColor: {
+        'purple-1000' : '#2c194d'
+      },
     },
   },
   variants: {

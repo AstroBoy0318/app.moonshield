@@ -12,14 +12,14 @@ export default function Menu() {
   }
   return (
     <>
-      <div className="flex flex-wrap shadow-xl fixed bg-white w-full z-50">
+      <div className="flex flex-wrap shadow-xl fixed w-full z-50 bg-purple-1000">
         <div className="w-full max-w-screen-lg mx-auto">
-          <nav className="relative flex flex-wrap items-center justify-between px-2 py-2 bg-white-500">
+          <nav className="relative flex flex-wrap items-center justify-between px-2 py-2">
             <div className="container px-4 mx-auto flex flex-wrap justify-between w-full">
               <div>
                 <img src="/images/logo.png" alt="logo" className="h-14 inline align-middle"/>
                 <span className="hidden md:inline-block text-lg font-bold leading-relaxed ml-4 whitespace-nowrap uppercase tracking-widest">
-                  <span className="text-white text-shadow-bordered font-sans">Moon</span> <span className="text-yellow-500 font-sans font-black">Shield</span>
+                  <span className="text-white font-sans">Moon</span><span className="text-yellow-500 font-sans">Shield</span>
                 </span>
               </div>
               <ul className="flex flex-row list-none ml-auto mt-3">

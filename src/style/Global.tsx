@@ -8,8 +8,11 @@ const GlobalStyle = createGlobalStyle`
   * {
     font-family: futura;
   }
-  body {
-    background: linear-gradient(315deg,#1b0f41,#fff);
+  body {    
+    background-image: url(/images/mainback.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
     img {
       height: auto;
