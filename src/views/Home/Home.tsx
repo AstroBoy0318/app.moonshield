@@ -6,7 +6,7 @@ import { useMaxBalance, useTokenBalance } from 'hooks/useTokenBalance'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandPointer, faPaperPlane, faQuestionCircle, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import addresses from 'config/constants/contracts'
-import { useLPTotalLiquidity, useMoonBalance, useNextClaimDate, useTotalLiquidity } from 'hooks/useSlotBalance'
+import { useLPTotalLiquidity, useMoonBalance, useNextClaimDate, useTotalLiquidity, useLPBnbamount, useLPMshieldamount } from 'hooks/useSlotBalance'
 import { useCollectBNB, useSendToken } from 'hooks/useMoonShield'
 import TokenInput from 'components/TokenInput'
 import { BUY_SMART_URL, DOC_ANTI_WHALES_URL, DOC_EARN_BNB_URL, WALLETS } from '../../config'
@@ -38,6 +38,7 @@ const Home: React.FC = () => {
 
   const mynextclaimdate = useNextClaimDate(account);
   const nextclaimdate = mynextclaimdate.toNumber() === 0?"Not available":new Date(mynextclaimdate.toNumber()*1000).toUTCString()
+  const nowdate = new Date().getTime()
 
   const contracttotalliquidity = useTotalLiquidity();
   const totalliquidity = contracttotalliquidity.toNumber()
@@ -47,11 +48,16 @@ const Home: React.FC = () => {
   const totalvalue = bnbPrice.toNumber()
   const realvalue = totalvalue === 0?'0':(totalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
-  const contractlptotalliquidity = useLPTotalLiquidity();
+  const contractlptotalliquidity = useLPBnbamount();
   const lptotalliquidity = contractlptotalliquidity.toNumber()
   const reallptotalliquidity = lptotalliquidity === 0?'0':(lptotalliquidity/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
 
   const reallpvalue = lptotalliquidity*totalvalue===0?'0':(lptotalliquidity*totalvalue/1000000000000000000).toLocaleString('en-US', {minimumFractionDigits: 3});
+
+  const LpMshield = useLPMshieldamount();
+  const LpMshieldValue = LpMshield.toNumber()
+  const LpRatio = lptotalliquidity/LpMshieldValue
+  const maxtransvalue = ((LpRatio*500000000000)/1000000000).toFixed(3);
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -82,7 +88,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <div className="pt-20">
-        <div className="w-full max-w-screen-md mx-auto rounded-xl p-4 shadow-2xl-centered mt-2 border border-solid border-purple-1000">
+        <div className="w-full max-w-screen-md mx-auto rounded-xl p-4 shadow-2xl-centered mt-2 border border-solid border-yellow-300">
           <div>
             <img src="/images/bnb.png" alt="bnb" className="h-24 mx-auto"/>
             <h1 className="text-2xl text-center font-bold">
@@ -102,7 +108,7 @@ const Home: React.FC = () => {
         </div>
         {!account?
           (
-            <div className="w-full md:w-10/12 mx-auto p-4 shadow-2xl mt-10 rounded-xl divide-y-4 border-purple-1000 border border-solid">
+            <div className="w-full md:w-10/12 mx-auto p-4 shadow-2xl mt-10 rounded-xl divide-y-4 border-yellow-300 border border-solid">
               <div className="mt-8">
                 <h1 className="text-3xl font-bold text-yellow-600 text-center">You are not connected or not using Binance Smart Chain network</h1>
               </div>
@@ -128,7 +134,7 @@ const Home: React.FC = () => {
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mt-10 font-bold text-white">
                 <InfoItem imgSrc="/images/max_trans.png" label="Max transaction amount">
-                  SHIELD {fullBalance} | BNB {formatedBNBNum}
+                  MSHLD 500000000000 | BNB {maxtransvalue}
                 </InfoItem>
                 <InfoItem imgSrc="/images/total_liquidity_pool.png" label="Total liquidity pool">
                   $ {reallpvalue}
@@ -155,7 +161,7 @@ const Home: React.FC = () => {
                   </div>
                   )
                 } */}
-                <div className="w-full px-10 py-8 rounded-xl shadow-2xl mt-10 border border-solid border-purple-1000 text-white">
+                <div className="w-full px-10 py-8 rounded-xl shadow-2xl mt-10 border border-solid border-yellow-300 text-white">
                   <div>
                     My collectable BNB: <b className="ml-5">{formatedBNBNum} BNB</b>
                   </div>
@@ -169,13 +175,13 @@ const Home: React.FC = () => {
                     <div className="mt-5 font-bold text-3xl">
                       You can collect your BNB at : {nextclaimdate}
                     </div>
-                    <Button className="mt-5" onClick={onCollect} disabled = {!BNBNum}>
+                    <Button className="mt-5" onClick={onCollect} disabled = {!BNBNum || mynextclaimdate.toNumber() > nowdate/1000}>
                       <FontAwesomeIcon icon={faHandPointer} className="mr-1"/>
                       Collect my BNB
                     </Button>
                   </div>
                 </div>
-                <div className="w-full px-10 py-8 rounded-xl shadow-2xl mt-10 border border-solid border-purple-1000 text-white">
+                <div className="w-full px-10 py-8 rounded-xl shadow-2xl mt-10 border border-solid border-yellow-300 text-white">
                   <div>
                     Disruptive Transfer between 2 wallets
                     <a href={DOC_ANTI_WHALES_URL} className="ml-10" target="_blank" rel="noreferrer">

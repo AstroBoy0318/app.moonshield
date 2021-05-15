@@ -20,4 +20,7 @@ export const getWbnbAddress = () => {
 export const getSlotAddress = () => {
   return addresses.slot[chainId]
 }
+export const getPancakePairAddress = () => {
+  return addresses.pancakepair[chainId]
+}
 

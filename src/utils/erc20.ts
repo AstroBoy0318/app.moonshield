@@ -5,6 +5,7 @@ import { AbiItem } from 'web3-utils'
 import erc20 from 'config/abi/erc20.json'
 import slot from 'config/abi/slot.json'
 import moonShield from 'config/abi/moonShield.json'
+import PancakePair from 'config/abi/PancakePair.json'
 import addresses from 'config/constants/contracts'
 import multiCall from 'config/abi/Multicall.json'
 
@@ -81,6 +82,38 @@ export const getMoonBalance = async (
   try {
     const balance: string = await contract.methods.calculateBNBReward(userAddress).call()
     return balance
+  } catch (e) {
+    return '0'
+  }
+}
+
+export const getLpBnbBalance = async (
+  provider: ProviderType,
+): Promise<string> => {
+  const web3 = new Web3(provider)
+  const chainId = process.env.REACT_APP_CHAIN_ID
+  const address = addresses.pancakepair[chainId]  
+  const contract = new web3.eth.Contract((PancakePair as unknown) as AbiItem, address)
+  
+  try {
+    const balance: string = await contract.methods.getReserves().call()
+    return balance[0]
+  } catch (e) {
+    return '0'
+  }
+}
+
+export const getLpMshieldBalance = async (
+  provider: ProviderType,
+): Promise<string> => {
+  const web3 = new Web3(provider)
+  const chainId = process.env.REACT_APP_CHAIN_ID
+  const address = addresses.pancakepair[chainId]  
+  const contract = new web3.eth.Contract((PancakePair as unknown) as AbiItem, address)
+  
+  try {
+    const balance: string = await contract.methods.getReserves().call()
+    return balance[1]
   } catch (e) {
     return '0'
   }

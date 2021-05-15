@@ -4,7 +4,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
 import pizzaABI from 'config/abi/pizza.json'
 import { getContract } from 'utils/web3'
-import { getMoonBalance, getNextClaimDate, getSlotBalance, getTokenBalance, getTotalLiquidty } from 'utils/erc20'
+import { getMoonBalance, getNextClaimDate, getSlotBalance, getTokenBalance, getTotalLiquidty, getLpBnbBalance, getLpMshieldBalance } from 'utils/erc20'
 import { getShieldAddress } from 'utils/addressHelpers'
 import useRefresh from './useRefresh'
 
@@ -92,6 +92,44 @@ export const useLPTotalLiquidity = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       const res = await getTotalLiquidty(ethereum, '0x241059E222F675D9Ce4FbDc1505F6FD61Fb770Db')
+      setBalance(new BigNumber(res))
+    }
+
+    if (ethereum) {
+      fetchBalance()
+    }
+  }, [ethereum, fastRefresh])
+
+  return balance
+}
+
+export const useLPBnbamount = () => {
+  const [balance, setBalance] = useState(new BigNumber(0))
+  const { ethereum }: { ethereum: provider } = useWallet()
+  const { fastRefresh } = useRefresh()
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const res = await getLpBnbBalance(ethereum)
+      setBalance(new BigNumber(res))
+    }
+
+    if (ethereum) {
+      fetchBalance()
+    }
+  }, [ethereum, fastRefresh])
+
+  return balance
+}
+
+export const useLPMshieldamount = () => {
+  const [balance, setBalance] = useState(new BigNumber(0))
+  const { ethereum }: { ethereum: provider } = useWallet()
+  const { fastRefresh } = useRefresh()
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const res = await getLpMshieldBalance(ethereum)
       setBalance(new BigNumber(res))
     }
 

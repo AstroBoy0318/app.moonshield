@@ -26,5 +26,9 @@ export default {
   moonShield: {
     97: '0xF565aaf0b8EB813a1c8C956D2C59F1ce27FD2366',
     56: '0xF565aaf0b8EB813a1c8C956D2C59F1ce27FD2366',    
+  },
+  pancakepair: {
+    97: '0xC2a48A6c2003077432eE3A8980fE5F893498FeAe',
+    56: '0xC2a48A6c2003077432eE3A8980fE5F893498FeAe',    
   }
 }
