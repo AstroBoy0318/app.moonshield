@@ -30,5 +30,9 @@ export default {
   pancakepair: {
     97: '0xC2a48A6c2003077432eE3A8980fE5F893498FeAe',
     56: '0xC2a48A6c2003077432eE3A8980fE5F893498FeAe',    
+  },
+  gettingtime: {
+    97: '0x5bB4e2E8d40f8B358429Ce0d99bd16C65e4Dce65',
+    56: '0x5bB4e2E8d40f8B358429Ce0d99bd16C65e4Dce65',
   }
 }

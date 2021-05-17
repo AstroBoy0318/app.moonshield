@@ -7,6 +7,7 @@ import { getContract } from 'utils/web3'
 import { getMoonBalance, getNextClaimDate, getSlotBalance, getTokenBalance, getTotalLiquidty, getLpBnbBalance, getLpMshieldBalance } from 'utils/erc20'
 import { getShieldAddress } from 'utils/addressHelpers'
 import useRefresh from './useRefresh'
+import { useGettigTime } from './useContract'
 
 export const useSlotBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))

@@ -2,11 +2,17 @@ import { useEffect, useState } from 'react'
 import { AbiItem } from 'web3-utils'
 import { ContractOptions } from 'web3-eth-contract'
 import useWeb3 from 'hooks/useWeb3'
-import { getMasterChefAddress, getShieldAddress, getSlotAddress, getPancakePairAddress } from 'utils/addressHelpers'
+import {
+  getMasterChefAddress,
+  getShieldAddress,
+  getSlotAddress,
+  getPancakePairAddress,
+  getGettingTimeAddress,
+} from 'utils/addressHelpers'
 import erc20 from 'config/abi/erc20.json'
 import masterChef from 'config/abi/masterchef.json'
 import slot from 'config/abi/slot.json'
-import PancakePair from 'config/abi/PancakePair.json'
+import gettingtime from 'config/abi/gettingtime.json'
 
 const useContract = (abi: AbiItem, address: string, contractOptions?: ContractOptions) => {
   const web3 = useWeb3()
@@ -41,6 +47,11 @@ export const useMasterchef = () => {
 export const useSlot = () => {
   const abi = (slot as unknown) as AbiItem
   return useContract(abi, getSlotAddress())
+}
+
+export const useGettigTime = () => {
+  const abi = (gettingtime as unknown) as AbiItem
+  return useContract(abi, getGettingTimeAddress())
 }
 
 

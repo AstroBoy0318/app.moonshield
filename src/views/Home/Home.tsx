@@ -12,7 +12,7 @@ import TokenInput from 'components/TokenInput'
 import { BUY_SMART_URL, DOC_ANTI_WHALES_URL, DOC_EARN_BNB_URL, WALLETS } from '../../config'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
-import { usePriceBnbBusd } from '../../state/hooks'
+import { useGettingTime, usePriceBnbBusd } from '../../state/hooks'
 import InfoItem from './components/InfoItem'
 
 const Home: React.FC = () => {
@@ -36,9 +36,10 @@ const Home: React.FC = () => {
   const BNBNum = collectibleBNB.toNumber()/1000000000000000000
   const formatedBNBNum = BNBNum === 0?'0':BNBNum.toLocaleString('en-US', {minimumFractionDigits: 8})
 
-  const mynextclaimdate = useNextClaimDate(account);
-  const nextclaimdate = mynextclaimdate.toNumber() === 0?"Not available":new Date(mynextclaimdate.toNumber()*1000).toUTCString()
-  const nowdate = new Date().getTime()
+  const mynextclaimdate = useNextClaimDate(account)
+  const nowdate = useGettingTime()
+  const nextclaimdateGmt = mynextclaimdate.toNumber() === 0?"Not available":new Date((mynextclaimdate.toNumber()-nowdate.toNumber())*1000+new Date().getTime()).toUTCString()
+  const nextclaimdateLocale = mynextclaimdate.toNumber() === 0?"":new Date((mynextclaimdate.toNumber()-nowdate.toNumber())*1000+new Date().getTime()).toString()
 
   const contracttotalliquidity = useTotalLiquidity();
   const totalliquidity = contracttotalliquidity.toNumber()
@@ -173,9 +174,12 @@ const Home: React.FC = () => {
                   </div>
                   <div className="text-center">
                     <div className="mt-5 font-bold text-3xl">
-                      You can collect your BNB at : {nextclaimdate}
+                      <div className="w-max mx-auto">
+                        You can collect your BNB at : {nextclaimdateGmt}
+                        <div className="text-sm text-right text-green-500">{nextclaimdateLocale}</div>
+                      </div>
                     </div>
-                    <Button className="mt-5" onClick={onCollect} disabled = {!BNBNum || mynextclaimdate.toNumber() > nowdate/1000}>
+                    <Button className="mt-5" onClick={onCollect} disabled = {!BNBNum || mynextclaimdate.toNumber() > nowdate.toNumber()}>
                       <FontAwesomeIcon icon={faHandPointer} className="mr-1"/>
                       Collect my BNB
                     </Button>

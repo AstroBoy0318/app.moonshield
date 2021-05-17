@@ -2,6 +2,7 @@ import React from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import ConnectButton from '../views/Home/components/ConnectButton'
 import Button from './Button'
+import { MAIN_SITE } from '../config'
 
 
 export default function Menu() {
@@ -24,6 +25,11 @@ export default function Menu() {
               </div>
               <ul className="flex flex-row list-none ml-auto mt-3">
                 <li className="nav-item">
+                  <Button type="button">
+                    <a href={MAIN_SITE}>Main Site</a>
+                  </Button>
+                </li>
+                <li className="nav-item ml-2">
                   <Button type="button" onClick={guideHandler}>
                     Guide
                   </Button>

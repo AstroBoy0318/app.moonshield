@@ -23,4 +23,7 @@ export const getSlotAddress = () => {
 export const getPancakePairAddress = () => {
   return addresses.pancakepair[chainId]
 }
+export const getGettingTimeAddress = () => {
+  return addresses.gettingtime[chainId]
+}
 

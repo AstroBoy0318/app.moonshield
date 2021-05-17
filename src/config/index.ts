@@ -32,3 +32,4 @@ export const WALLETS = [
 ]
 export const DOC_EARN_BNB_URL = "https://docs.moonshield.finance/innovation/a-new-way-to-earn-bnb"
 export const DOC_ANTI_WHALES_URL = "https://docs.moonshield.finance/innovation/anti-whales"
+export const MAIN_SITE = "https://moonshield.finance"
